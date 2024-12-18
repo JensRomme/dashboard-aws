@@ -1,0 +1,49 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: 3vh;
+}
+
+#nav_logo {
+    height: 60px;
+    width: 100px;
+}
+
+.nav-wrapper {
+    background-color: #C6002A;
+}
+
+.start-button {
+    background-color: green;
+}
+
+.history-button {
+    background-color: grey;
+}
+
+.change-button {
+    background-color: blue;
+}
+
+.stop-button {
+    background-color: #C6002A;
+}
+
+table.centered {
+    font-size: 1.2em;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+.modal {
+    max-width: 500px;
+}
