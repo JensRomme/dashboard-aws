@@ -8,13 +8,60 @@
 
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- Materialize JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-    <link rel="stylesheet" href="styleDashboard.css">
+        main {
+            flex: 1 0 auto;
+            margin-top: 3vh;
+        }
+
+        #nav_logo {
+            height: 60px;
+            width: 100px;
+        }
+
+        .nav-wrapper {
+            background-color: #C6002A;
+        }
+
+        .start-button {
+            background-color: green;
+        }
+
+        .history-button {
+            background-color: grey;
+        }
+
+        .change-button {
+            background-color: blue;
+        }
+
+        .stop-button {
+            background-color: #C6002A;
+        }
+
+        table.centered {
+            font-size: 1.2em;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .modal {
+            max-width: 500px;
+        }
+    </style>
 </head>
 
 <body>
@@ -93,32 +140,51 @@
         </div>
     </div>
 
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Initialiseer de modal van Materialize
             const modals = document.querySelectorAll('.modal');
             M.Modal.init(modals);
 
-            // Testdata in de tabel plaatsen
-            const testMetingen = [
-                { stroming: 'Sterk', pH: '7.2', temperatuur: '.5°C', zuurstof: '8.1 mg/L', troebelheid: '2 NTU' },
-                { stroming: 'Matig', pH: '6.8', temperatuur: '19.0°C', zuurstof: '7.9 mg/L', troebelheid: '4 NTU' },
-                { stroming: 'Zwak', pH: '7.5', temperatuur: '17.8°C', zuurstof: '8.5 mg/L', troebelheid: '1 NTU' }
-            ];
+            // Functie om willekeurige sensordata te genereren
+            function getRandomData() {
+                return {
+                    stroming: ['Sterk', 'Matig', 'Zwak'][Math.floor(Math.random() * 3)],
+                    pH: (Math.random() * (14 - 0) + 0).toFixed(2),
+                    temperatuur: (Math.random() * (30 - 5) + 5).toFixed(2) + " °C",
+                    zuurstof: (Math.random() * (10 - 0) + 0).toFixed(2) + " mg/L",
+                    troebelheid: (Math.random() * (100 - 0) + 0).toFixed(2) + " NTU"
+                };
+            }
 
-            const tableBody = document.getElementById('metingTable');
-            testMetingen.forEach(meting => {
-                const row = `
-                    <tr>
-                        <td>${meting.stroming}</td>
-                        <td>${meting.pH}</td>
-                        <td>${meting.temperatuur}</td>
-                        <td>${meting.zuurstof}</td>
-                        <td>${meting.troebelheid}</td>
-                    </tr>
-                `;
-                tableBody.insertAdjacentHTML('beforeend', row);
-            });
+            // Functie om de tabel te vullen met data
+            function updateTable() {
+                const data = [getRandomData(), getRandomData(), getRandomData()]; // Genereer 3 rijen met data
+                const tableBody = document.getElementById('metingTable');
+                tableBody.innerHTML = ""; // Wis de huidige inhoud
+
+                data.forEach(meting => {
+                    const row = `
+                        <tr>
+                            <td>${meting.stroming}</td>
+                            <td>${meting.pH}</td>
+                            <td>${meting.temperatuur}</td>
+                            <td>${meting.zuurstof}</td>
+                            <td>${meting.troebelheid}</td>
+                        </tr>
+                    `;
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                });
+            }
+
+            // Update de tabel elke 5 seconden
+            setInterval(updateTable, 5000);
+
+            // Voer een eerste update uit bij het laden van de pagina
+            updateTable();
         });
     </script>
 </body>
