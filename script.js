@@ -1,53 +1,72 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const API_URL = "https://04es5s27rh.execute-api.eu-central-1.amazonaws.com/default/API_Get";
+    const API_URL = "https://g7yv4v6972.execute-api.eu-central-1.amazonaws.com/sensorWaarden";
 
-    // Initialiseer de modal van Materialize
-    const modals = document.querySelectorAll('.modal');
-    M.Modal.init(modals);
-
-    // Functie om API-data op te halen
+    // Functie om gegevens van de API op te halen
     async function fetchData() {
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        loadingIndicator.style.display = 'block';
+        
         try {
-            const response = await fetch(API_URL);
-            if (!response.ok) {
-                throw new Error(`Fout bij API: ${response.status}`);
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error("Fout bij het ophalen van data:", error);
-            return [];
-        }
-    }
-
-    // Functie om de tabel bij te werken
-    async function updateTable() {
-        const tableBody = document.getElementById('metingTable');
-        tableBody.innerHTML = ""; // Reset inhoud
-
-        const data = await fetchData();
-        if (data.length > 0) {
-            data.forEach(item => {
-                const row = `
-                    <tr>
-                        <td>${item.stroming || 'Onbekend'}</td>
-                        <td>${item.pH || 'N/A'}</td>
-                        <td>${item.temperatuur || 'N/A'} °C</td>
-                        <td>${item.zuurstof || 'N/A'} mg/L</td>
-                        <td>${item.troebelheid || 'N/A'} NTU</td>
-                    </tr>
-                `;
-                tableBody.insertAdjacentHTML('beforeend', row);
+            console.log('Start API aanroep...');
+            const response = await fetch(API_URL, {
+                headers: {
+                    'Accept': 'application/json',
+                }
             });
-        } else {
-            const row = `<tr><td colspan="5">Geen gegevens beschikbaar</td></tr>`;
-            tableBody.insertAdjacentHTML('beforeend', row);
+            
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            
+            
+            const data = await response.json();
+            console.log('Ontvangen data:', data);
+            
+            if (!Array.isArray(data)) {
+                console.error('Ontvangen data is geen array:', data);
+                return;
+            }
+            
+            updateTable(data);
+        } catch (error) {
+            console.error('Fout bij het ophalen van gegevens:', error);
+            // Toon een gebruikersvriendelijke foutmelding
+            const tableBody = document.getElementById('metingTable');
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="5">Er is een fout opgetreden bij het ophalen van de gegevens. Probeer het later opnieuw.</td>
+                </tr>
+            `;
+        } finally {
+            loadingIndicator.style.display = 'none';
         }
     }
 
-    // Update de tabel elke 5 seconden
-    setInterval(updateTable, 5000);
+    // Functie om de tabel bij te werken met de opgehaalde gegevens
+    function updateTable(data) {
+        const tableBody = document.getElementById('metingTable');
+        tableBody.innerHTML = ''; // Wis de huidige inhoud
 
-    // Eerste update bij pagina laden
-    updateTable();
+        data.forEach(item => {
+            const row = `
+                <tr>
+                    <td>${item.turbidity || 'N/A'}</td>
+                    <td>${item.pH || 'N/A'}</td>
+                    <td>${item.temperature || 'N/A'}</td>
+                    <td>${item.oxygen || 'N/A'}</td>
+                    <td>${item.time || 'N/A'}</td>
+                </tr>
+            `;
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+
+    // Haal gegevens op bij het laden van de pagina
+    fetchData();
+
+   
+    setInterval(fetchData, 4000000); // 4000 seconden
 });

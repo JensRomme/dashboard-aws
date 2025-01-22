@@ -4,70 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Dashboard</title>
 
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
 
-    
+    <!-- Lokale CSS -->
+    <link rel="stylesheet" href="styleDashboard.css">
 </head>
-<!-- css binnen html, anders veranderen de kleuren niet, dit ligt materialize, maar ik weet niet hoe dit op te lossen is-->
-<style>
-    body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-main {
-    flex: 1 0 auto;
-    margin-top: 3vh;
-}
-
-#nav_logo {
-    height: 60px;
-    width: 100px;
-}
-
-.nav-wrapper {
-    background-color: #C6002A;
-}
-
-.start-button {
-    background-color: green;
-}
-
-.history-button {
-    background-color: grey;
-}
-
-.change-button {
-    background-color: blue;
-}
-
-.stop-button {
-    background-color: #C6002A;
-}
-
-table.centered {
-    font-size: 1.2em;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-}
-
-.modal {
-    max-width: 500px;
-}
-
-</style>
-
-
 
 <body>
     <header>
@@ -87,11 +32,10 @@ th, td {
             <!-- Knoppen sectie -->
             <section id="besturing">
                 <h1 class="center">Dashboard Besturing</h1>
-
                 <div class="row center-align">
-                    <button type="button" class="btn start-button" onclick="apiCall('start')">Start meting</button>
-                    <button type="button" class="btn stop-button" onclick="apiCall('stop')">Stop meting</button>
-                    <button type="button" class="btn history-button" onclick="apiCall('geschiedenis')">Geschiedenis</button>
+                    <button type="button" class="btn start-button">Start meting</button>
+                    <button type="button" class="btn stop-button">Stop meting</button>
+                    <button type="button" class="btn history-button">Geschiedenis</button>
                     <button type="button" class="btn change-button modal-trigger" data-target="changeModal">Aanmaken</button>
                 </div>
             </section>
@@ -103,46 +47,21 @@ th, td {
                     <table class="centered">
                         <thead>
                             <tr>
-                                <th>Stroming</th>
-                                <th>pH-waarde</th>
-                                <th>Temperatuur</th>
-                                <th>Zuurstof</th>
                                 <th>Troebelheid</th>
+                                <th>pH-waarde</th>
+                                <th>Temperatuur (°C)</th>
+                                <th>Zuurstof (mg/L)</th>
+                                <th>Tijd</th>
                             </tr>
                         </thead>
                         <tbody id="metingTable">
-                            <!-- Dynamische tabel met metingen -->
+                            <!-- Dynamische gegevens -->
                         </tbody>
                     </table>
                 </div>
             </section>
         </div>
     </main>
-
-    <!-- Modal structuur (Pop-up) -->
-    <div id="changeModal" class="modal">
-        <div class="modal-content">
-            <h4>Nieuwe Boei Aanmaken</h4>
-            <form>
-                <div class="input-field">
-                    <input id="boei_name" type="text" class="validate">
-                    <label for="boei_name">Naam van de Boei</label>
-                </div>
-                <div class="input-field">
-                    <input id="boei_location" type="text" class="validate">
-                    <label for="boei_location">Locatie</label>
-                </div>
-                <div class="input-field">
-                    <input id="boei_description" type="text" class="validate">
-                    <label for="boei_description">Beschrijving</label>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Annuleren</a>
-            <a href="#!" class="modal-close waves-effect waves-light btn green">Opslaan</a>
-        </div>
-    </div>
 
     <!-- Materialize JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

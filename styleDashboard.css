@@ -1,0 +1,61 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: 3vh;
+}
+
+#nav_logo {
+    height: 60px;
+    width: 100px;
+}
+
+.nav-wrapper {
+    background-color: #C6002A;
+}
+
+.start-button {
+    background-color: green !important;
+    color: white !important;
+}
+
+.history-button {
+    background-color: grey !important;
+    color: white !important;
+}
+
+.change-button {
+    background-color: blue !important;
+    color: white !important;
+}
+
+.stop-button {
+    background-color: #C6002A !important;
+    color: white !important;
+}
+
+table.centered {
+    font-size: 1.2em;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
