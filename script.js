@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Functie om gegevens van de API op te halen
     async function fetchData() {
         const loadingIndicator = document.getElementById('loadingIndicator');
-        loadingIndicator.style.display = 'block';
-        
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'block';
+        }
+
         try {
             console.log('Start API aanroep...');
             const response = await fetch(API_URL, {
@@ -13,41 +15,50 @@ document.addEventListener('DOMContentLoaded', function () {
                     'Accept': 'application/json',
                 }
             });
-            
+
             console.log('Response status:', response.status);
             console.log('Response headers:', response.headers);
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            
-            
+
             const data = await response.json();
             console.log('Ontvangen data:', data);
-            
+
             if (!Array.isArray(data)) {
                 console.error('Ontvangen data is geen array:', data);
                 return;
             }
-            
+
             updateTable(data);
         } catch (error) {
             console.error('Fout bij het ophalen van gegevens:', error);
-            // Toon een gebruikersvriendelijke foutmelding
+
+            // Controleer of de tabel bestaat voordat je de foutmelding toevoegt
             const tableBody = document.getElementById('metingTable');
-            tableBody.innerHTML = `
-                <tr>
-                    <td colspan="5">Er is een fout opgetreden bij het ophalen van de gegevens. Probeer het later opnieuw.</td>
-                </tr>
-            `;
+            if (tableBody) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5">Er is een fout opgetreden bij het ophalen van de gegevens. Probeer het later opnieuw.</td>
+                    </tr>
+                `;
+            }
         } finally {
-            loadingIndicator.style.display = 'none';
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
         }
     }
 
     // Functie om de tabel bij te werken met de opgehaalde gegevens
     function updateTable(data) {
         const tableBody = document.getElementById('metingTable');
+        if (!tableBody) {
+            console.error('Element met ID "metingTable" niet gevonden.');
+            return;
+        }
+
         tableBody.innerHTML = ''; // Wis de huidige inhoud
 
         data.forEach(item => {
@@ -67,6 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Haal gegevens op bij het laden van de pagina
     fetchData();
 
-   
-    setInterval(fetchData, 4000000); // 4000 seconden
+    // Vernieuw de gegevens elke 100 seconden (interval was te groot voor 10 seconden, dus aangepast naar juiste waarde)
+    setInterval(fetchData, 10000); // 10 seconden
 });
