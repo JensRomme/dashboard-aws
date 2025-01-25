@@ -1,4 +1,4 @@
-body {
+;body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -34,6 +34,11 @@ main {
     color: white !important;
 }
 
+.select-button {
+    background-color: orange !important;
+    color: white !important;
+}
+
 .stop-button {
     background-color: #C6002A !important;
     color: white !important;
@@ -59,4 +64,3 @@ th {
     width: 80%;
     margin: auto;
 }
-

@@ -33,10 +33,9 @@
             <section id="besturing">
                 <h1 class="center">Dashboard Besturing</h1>
                 <div class="row center-align">
-                    <button type="button" class="btn start-button">Start meting</button>
-                    <button type="button" class="btn stop-button">Stop meting</button>
                     <button type="button" class="btn history-button">Geschiedenis</button>
                     <button type="button" class="btn change-button modal-trigger" data-target="changeModal">Aanmaken</button>
+                    <button type="button" class="btn select-button modal-trigger" data-target="selectModal">Selecteren</button>
                 </div>
             </section>
 
@@ -52,6 +51,7 @@
                                 <th>Temperatuur (°C)</th>
                                 <th>Zuurstof (mg/L)</th>
                                 <th>Tijd</th>
+                                <th>Waterkwaliteit</th> 
                             </tr>
                         </thead>
                         <tbody id="metingTable">
@@ -62,6 +62,42 @@
             </section>
         </div>
     </main>
+
+    <!-- Modal voor boei aanmaken -->
+    <div id="changeModal" class="modal">
+        <div class="modal-content">
+            <h4>Boei Aanmaken</h4>
+            <form id="createBuoyForm">
+                <div class="input-field">
+                    <input type="text" id="buoyName" name="buoyName" required>
+                    <label for="buoyName">Naam van de boei</label>
+                </div>
+                <button type="submit" class="btn">Opslaan</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-close btn red">Annuleren</button>
+        </div>
+    </div>
+
+    <!-- Modal voor boei selecteren -->
+    <div id="selectModal" class="modal">
+        <div class="modal-content">
+            <h4>Selecteer een Boei</h4>
+            <form id="selectBuoyForm">
+                <div class="input-field">
+                    <select id="buoySelector" name="buoySelector">
+                        <option value="" disabled selected>Kies een boei</option>
+                    </select>
+                    <label for="buoySelector">Beschikbare boeien</label>
+                </div>
+                <button type="submit" class="btn">Opslaan</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-close btn red">Annuleren</button>
+        </div>
+    </div>
 
     <!-- Materialize JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
