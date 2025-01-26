@@ -12,6 +12,8 @@
 
     <!-- Lokale CSS -->
     <link rel="stylesheet" href="styleDashboard.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
 </head>
 
 <body>
@@ -33,9 +35,10 @@
             <section id="besturing">
                 <h1 class="center">Dashboard Besturing</h1>
                 <div class="row center-align">
-                    <button type="button" class="btn history-button">Geschiedenis</button>
+                    <button type="button" class="btn history-button">Opslaan</button>
                     <button type="button" class="btn change-button modal-trigger" data-target="changeModal">Aanmaken</button>
                     <button type="button" class="btn select-button modal-trigger" data-target="selectModal">Selecteren</button>
+                    <button type="button" class="btn data-tab-button">Bekijk Geschiedenis</button>
                 </div>
             </section>
 
@@ -51,10 +54,34 @@
                                 <th>Temperatuur (°C)</th>
                                 <th>Zuurstof (mg/L)</th>
                                 <th>Tijd</th>
-                                <th>Waterkwaliteit</th> 
+                                <th>Waterkwaliteit</th>
                             </tr>
                         </thead>
                         <tbody id="metingTable">
+                            <!-- Dynamische gegevens -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Data Tab -->
+            <section id="dataTab">
+                <h1 class="center">Opgeslagen Gegevens</h1>
+                <div id="dataTabContainer">
+                    <table class="centered">
+                        <thead>
+                            <tr>
+                                <th>DEVEUI</th>
+                                <th>Eigenaar</th>
+                                <th>Heeft GPS</th>
+                                <th>Productnummer</th>
+                                <th>Pin Type</th>
+                                <th>Pin Nummer</th>
+                                <th>Naam</th>
+                                <th>Meet Waarden</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTabTable">
                             <!-- Dynamische gegevens -->
                         </tbody>
                     </table>
@@ -99,8 +126,36 @@
         </div>
     </div>
 
+    <!-- Modal voor Geschiedenis -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <h4>Geschiedenis</h4>
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>DEVEUI</th>
+                        <th>Eigenaar</th>
+                        <th>Heeft GPS</th>
+                        <th>Productnummer</th>
+                        <th>Pin Type</th>
+                        <th>Pin Nummer</th>
+                        <th>Sensor Naam</th>
+                        <th>Meet Waarden</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTable">
+                    <!-- Dynamische gegevens -->
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-close btn red">Sluiten</button>
+        </div>
+    </div>
+
     <!-- Materialize JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Lokale JavaScript -->
     <script src="script.js"></script>
 </body>
 
