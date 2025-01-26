@@ -13,10 +13,10 @@
     <!-- Lokale CSS -->
     <link rel="stylesheet" href="styleDashboard.css">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
 </head>
 
 <body>
+    <!-- Header -->
     <header>
         <div class="navbar-fixed">
             <nav>
@@ -29,20 +29,28 @@
         </div>
     </header>
 
+    <!-- Main content -->
     <main>
         <div class="container">
-            <!-- Knoppen sectie -->
+            <!-- Knoppen Sectie -->
             <section id="besturing">
                 <h1 class="center">Dashboard Besturing</h1>
                 <div class="row center-align">
-                    <button type="button" class="btn history-button">Opslaan</button>
+                    <!-- Opslaan knop -->
+                    <button type="button" class="btn history-button modal-trigger" data-target="saveModal">Opslaan</button>
+                    
+                    <!-- Aanmaken knop -->
                     <button type="button" class="btn change-button modal-trigger" data-target="changeModal">Aanmaken</button>
+                    
+                    <!-- Selecteren knop -->
                     <button type="button" class="btn select-button modal-trigger" data-target="selectModal">Selecteren</button>
+                    
+                    <!-- Bekijk Geschiedenis knop -->
                     <button type="button" class="btn data-tab-button">Bekijk Geschiedenis</button>
                 </div>
             </section>
 
-            <!-- Tabel sectie -->
+            <!-- Tabel voor Metingen -->
             <section id="metingen">
                 <h1 class="center">Metingen</h1>
                 <div id="metingContainer">
@@ -58,13 +66,13 @@
                             </tr>
                         </thead>
                         <tbody id="metingTable">
-                            <!-- Dynamische gegevens -->
+                            <!-- Dynamische gegevens worden hier toegevoegd -->
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- Data Tab -->
+            <!-- Data Tab voor Geschiedenis -->
             <section id="dataTab">
                 <h1 class="center">Opgeslagen Gegevens</h1>
                 <div id="dataTabContainer">
@@ -82,7 +90,7 @@
                             </tr>
                         </thead>
                         <tbody id="dataTabTable">
-                            <!-- Dynamische gegevens -->
+                            <!-- Dynamische gegevens worden hier toegevoegd -->
                         </tbody>
                     </table>
                 </div>
@@ -90,7 +98,39 @@
         </div>
     </main>
 
-    <!-- Modal voor boei aanmaken -->
+    <!-- Modal voor Opslaan -->
+    <div id="saveModal" class="modal">
+        <div class="modal-content">
+            <h4>Gegevens Opslaan</h4>
+            <form id="saveDataForm">
+                <div class="input-field">
+                    <input type="text" id="ownerName" name="ownerName" required>
+                    <label for="ownerName">Naam Eigenaar</label>
+                </div>
+                <div class="input-field">
+                    <select id="hasGPS" name="hasGPS">
+                        <option value="true">Ja</option>
+                        <option value="false">Nee</option>
+                    </select>
+                    <label for="hasGPS">Heeft GPS</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="productNumber" name="productNumber" required>
+                    <label for="productNumber">Productnummer</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="pinNumber" name="pinNumber" required>
+                    <label for="pinNumber">Pin Nummer</label>
+                </div>
+                <button type="submit" class="btn">Opslaan</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-close btn red">Annuleren</button>
+        </div>
+    </div>
+
+    <!-- Modal voor Boei Aanmaken -->
     <div id="changeModal" class="modal">
         <div class="modal-content">
             <h4>Boei Aanmaken</h4>
@@ -107,7 +147,7 @@
         </div>
     </div>
 
-    <!-- Modal voor boei selecteren -->
+    <!-- Modal voor Boei Selecteren -->
     <div id="selectModal" class="modal">
         <div class="modal-content">
             <h4>Selecteer een Boei</h4>
@@ -126,36 +166,8 @@
         </div>
     </div>
 
-    <!-- Modal voor Geschiedenis -->
-    <div id="historyModal" class="modal">
-        <div class="modal-content">
-            <h4>Geschiedenis</h4>
-            <table class="centered">
-                <thead>
-                    <tr>
-                        <th>DEVEUI</th>
-                        <th>Eigenaar</th>
-                        <th>Heeft GPS</th>
-                        <th>Productnummer</th>
-                        <th>Pin Type</th>
-                        <th>Pin Nummer</th>
-                        <th>Sensor Naam</th>
-                        <th>Meet Waarden</th>
-                    </tr>
-                </thead>
-                <tbody id="historyTable">
-                    <!-- Dynamische gegevens -->
-                </tbody>
-            </table>
-        </div>
-        <div class="modal-footer">
-            <button class="modal-close btn red">Sluiten</button>
-        </div>
-    </div>
-
     <!-- Materialize JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Lokale JavaScript -->
     <script src="script.js"></script>
 </body>
 

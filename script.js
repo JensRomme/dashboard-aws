@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Functie om gegevens op te halen
+    // Functie om gegevens op te slaan
     async function fetchData() {
         try {
             console.log(`Ophalen van data voor boei: ${currentBuoyName}`);
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
             updateTable(data);
         } catch (error) {
-            console.error("Fout bij ophalen gegevens:", error);
+            console.error("Fout bij opslaan gegevens:", error);
         }
     }
 

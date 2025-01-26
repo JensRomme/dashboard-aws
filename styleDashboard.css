@@ -1,4 +1,4 @@
-;body {
+body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -63,4 +63,12 @@ th {
 .container {
     width: 80%;
     margin: auto;
+}
+
+.modal {
+    max-width: 500px;
+}
+
+input[type="text"] {
+    margin-bottom: 20px;
 }
