@@ -2,7 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    overflow: hidden;
+    overflow: auto;
 }
 
 main {
@@ -35,7 +35,7 @@ main {
 }
 
 .select-button {
-    background-color: orange !important;
+    background-color: green !important;
     color: white !important;
 }
 
