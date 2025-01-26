@@ -93,17 +93,54 @@ document.addEventListener("DOMContentLoaded", function () {
         if (tableBody) tableBody.innerHTML = ""; // Wis de tabel
 
         data.forEach((item) => {
+            // Bepaal de waterkwaliteit op basis van de voorwaarden
+            const pH = item.pH;
+            const oxygen = item.oxygen;
+            const turbidity = item.turbidity;
+
+            let waterQuality = "Goed"; // Standaardwaarde
+            let waterQualityColor = "background-color: lightgreen;";
+            const messages = [];
+
+            // Controleer pH-waarde
+            if (pH < 6.0 || pH > 9.0) {
+                waterQuality = "Slecht";
+                waterQualityColor = "background-color: lightcoral;";
+                messages.push(`pH-waarde is ${pH} (acceptabele range: 6.0 - 9.0)`);
+            }
+
+            // Controleer zuurstofgehalte
+            if (oxygen < 5 || oxygen > 11) {
+                waterQuality = "Slecht";
+                waterQualityColor = "background-color: lightcoral;";
+                messages.push(`Zuurstofgehalte is ${oxygen} mg/L (acceptabele range: 5 - 11 mg/L)`);
+            }
+
+            // Controleer troebelheid
+            if (turbidity > 25) {
+                waterQuality = "Slecht";
+                waterQualityColor = "background-color: lightcoral;";
+                messages.push(`Troebelheid is ${turbidity} NTU (acceptabel niveau: ≤25 NTU)`);
+            }
+
+            // Voeg een rij toe aan de tabel
             const row = `
                 <tr>
-                    <td>${item.turbidity || "N/A"}</td>
-                    <td>${item.pH || "N/A"}</td>
-                    <td>${item.temperature || "N/A"}</td>
-                    <td>${item.oxygen || "N/A"}</td>
-                    <td>${new Date(item.Time).toLocaleString() || "N/A"}</td>
-                    <td>${item.quality || "Onbekend"}</td>
+                    <td>${turbidity !== undefined ? turbidity : "N/A"}</td>
+                    <td>${pH !== undefined ? pH : "N/A"}</td>
+                    <td>${item.temperature !== undefined ? item.temperature : "N/A"}</td>
+                    <td>${oxygen !== undefined ? oxygen : "N/A"}</td>
+                    <td>${item.Time ? new Date(item.Time).toLocaleString() : "N/A"}</td>
+                    <td style="${waterQualityColor}">${waterQuality}</td>
                 </tr>
             `;
+
             tableBody.insertAdjacentHTML("beforeend", row);
+
+            // Log waarschuwingen in de console indien nodig
+            if (messages.length > 0) {
+                console.log("Waterkwaliteit waarschuwingen:", messages.join("; "));
+            }
         });
     }
 
