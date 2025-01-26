@@ -36,18 +36,9 @@
             <section id="besturing">
                 <h1 class="center">Dashboard Besturing</h1>
                 <div class="row center-align">
-                    
-                    
-                    <!-- Aanmaken knop -->
                     <button type="button" class="btn change-button modal-trigger" data-target="changeModal">Aanmaken</button>
-                    
-                    <!-- Selecteren knop -->
                     <button type="button" class="btn select-button modal-trigger" data-target="selectModal">Starten</button>
-
-                    <!-- Opslaan knop -->
                     <button type="button" class="btn history-button modal-trigger" data-target="saveModal">Opslaan</button>
-
-                    
                 </div>
             </section>
 
@@ -84,10 +75,7 @@
                                 <th>Eigenaar</th>
                                 <th>Heeft GPS</th>
                                 <th>Productnummer</th>
-                                <th>Pin Type</th>
                                 <th>Pin Nummer</th>
-                                <th>Naam</th>
-                                <th>Meet Waarden</th>
                             </tr>
                         </thead>
                         <tbody id="historyTable">
@@ -96,7 +84,6 @@
                     </table>
                 </div>
             </section>
-            
         </div>
     </main>
 
@@ -105,25 +92,56 @@
         <div class="modal-content">
             <h4>Gegevens Opslaan</h4>
             <form id="saveDataForm">
+                <!-- Selector voor de tabel -->
                 <div class="input-field">
-                    <input type="text" id="ownerName" name="ownerName" required>
+                    <select id="tableSelector" name="tableSelector" required>
+                        <option value="" disabled selected>Kies een tabel</option>
+                        <option value="Boei">Boei</option>
+                        <option value="BoeiSensor">BoeiSensor</option>
+                        <option value="Sensor">Sensor</option>
+                    </select>
+                    <label for="tableSelector">Tabel Selecteren</label>
+                </div>
+
+                <!-- Dynamisch verborgen/zichtbare velden -->
+                <div id="ownerNameField" class="input-field dynamic-input" style="display: none;">
+                    <input type="text" id="ownerName" name="ownerName">
                     <label for="ownerName">Naam Eigenaar</label>
                 </div>
-                <div class="input-field">
+
+                <div id="hasGPSField" class="input-field dynamic-input" style="display: none;">
                     <select id="hasGPS" name="hasGPS">
                         <option value="true">Ja</option>
                         <option value="false">Nee</option>
                     </select>
                     <label for="hasGPS">Heeft GPS</label>
                 </div>
-                <div class="input-field">
-                    <input type="text" id="productNumber" name="productNumber" required>
+
+                <div id="productNumberField" class="input-field dynamic-input" style="display: none;">
+                    <input type="text" id="productNumber" name="productNumber">
                     <label for="productNumber">Productnummer</label>
                 </div>
-                <div class="input-field">
-                    <input type="text" id="pinNumber" name="pinNumber" required>
+
+                <div id="pinTypeField" class="input-field dynamic-input" style="display: none;">
+                    <input type="text" id="pinType" name="pinType">
+                    <label for="pinType">Pin Type</label>
+                </div>
+
+                <div id="pinNumberField" class="input-field dynamic-input" style="display: none;">
+                    <input type="text" id="pinNumber" name="pinNumber">
                     <label for="pinNumber">Pin Nummer</label>
                 </div>
+
+                <div id="sensorNameField" class="input-field dynamic-input" style="display: none;">
+                    <input type="text" id="sensorName" name="sensorName">
+                    <label for="sensorName">Sensor Naam</label>
+                </div>
+
+                <div id="measurementValueField" class="input-field dynamic-input" style="display: none;">
+                    <input type="text" id="measurementValue" name="measurementValue">
+                    <label for="measurementValue">Meet Waarden</label>
+                </div>
+
                 <button type="submit" class="btn">Opslaan</button>
             </form>
         </div>
